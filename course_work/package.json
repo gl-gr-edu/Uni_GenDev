@@ -1,0 +1,12 @@
+{
+  "name": "warehouse-sim",
+  "version": "1.0.0",
+  "description": "Warehouse simulation demonstrating JS concepts: generators, memoization, async, streams, proxies, and more.",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "authors": ["Gleb"],
+  "license": "MIT"
+}
