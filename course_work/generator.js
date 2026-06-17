@@ -3,7 +3,7 @@ export function* packageGenerator() {
     let id = 1;
     while (true) {
         const type = types[Math.floor(Math.random() * types.length)];
-        const weight = parseFloat((Math.random() * 50 + 0.5).toFixed(2));
+        const weight = +((Math.random() * 50 + 0.5).toFixed(2));
         yield { id: id++, type, weight, timestamp: Date.now() };
     }
 }

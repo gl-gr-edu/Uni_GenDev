@@ -1,7 +1,7 @@
 import { EventEmitter } from "./eventEmitter.js";
 import { packageGenerator, consumeGeneratorWithTimeout } from "./generator.js";
 import { memoize } from "./memoize.js";
-import { BiDirectionalPriorityQueue } from "./priorityQueue.js";
+import { PriorityQueue } from "./priorityQueue.js";
 import { asyncFilter } from "./asyncFilter.js";
 import { createAsyncStream } from "./asyncStream.js";
 import { ApiService, AuthProxy } from "./authProxy.js";
@@ -15,14 +15,14 @@ async function runSimulation() {
         console.log(`Notification: Package #${pkg.id} (${pkg.type}) arrived at warehouse.`);
     });
 
-    const rawCalculation = (weight, distance) => {
+    const calculation = (weight, distance) => {
         let base = weight * 2.5 + distance * 1.2;
-        return parseFloat(base.toFixed(2));
+        return +(base.toFixed(2));
     };
-    const loggedCalculation = withLogging("INFO", rawCalculation);
+    const loggedCalculation = withLogging("INFO", calculation);
     const memoizedCostCalc = memoize(loggedCalculation, { maxSize: 3, policy: "LRU" });
 
-    const outboundQueue = new BiDirectionalPriorityQueue();
+    const outboundQueue = new PriorityQueue();
 
     console.log("\n--- Processing Incoming Stream ---");
     await consumeGeneratorWithTimeout(packageGenerator, 1.5, (pkg) => {

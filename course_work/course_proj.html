@@ -181,7 +181,7 @@
     import { EventEmitter } from "./eventEmitter.js";
     import { packageGenerator, consumeGeneratorWithTimeout } from "./generator.js";
     import { memoize } from "./memoize.js";
-    import { BiDirectionalPriorityQueue } from "./priorityQueue.js";
+    import { PriorityQueue } from "./priorityQueue.js";
     import { asyncFilter } from "./asyncFilter.js";
     import { createAsyncStream } from "./asyncStream.js";
     import { ApiService, AuthProxy } from "./authProxy.js";
@@ -213,7 +213,7 @@
         uiLog("=== СИМУЛЯЦІЮ ЗАПУЩЕНО ===", "system");
 
         const warehouseEvents = new EventEmitter();
-        const outboundQueue = new BiDirectionalPriorityQueue();
+        const outboundQueue = new PriorityQueue();
 
         warehouseEvents.subscribe("package_arrived", (pkg) => {
             uiLog(`WMS: Посилка #${pkg.id} (${pkg.type}) прибула.`);
